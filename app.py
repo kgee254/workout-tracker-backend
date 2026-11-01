@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 
 from extensions import db, bcrypt, jwt
 from models import User, Workout
+from auth import auth_bp
 
 
 def create_app():
@@ -28,6 +29,8 @@ def create_app():
     bcrypt.init_app(app)
     jwt.init_app(app)
     Migrate(app, db)
+
+    app.register_blueprint(auth_bp)
 
     return app
 
